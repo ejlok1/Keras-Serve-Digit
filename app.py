@@ -77,7 +77,7 @@ def index():
 	#render out pre-built HTML file right on the index page
 	return render_template("index.html")
 
-@app.route('/predict/',methods=['GET','POST'])
+@app.route('/predict/',methods=['POST'])
 def predict():
 	#whenever the predict method is called, we're going
 	#to input the user drawn character as an image into the model
