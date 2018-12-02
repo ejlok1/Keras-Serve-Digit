@@ -3,7 +3,7 @@
 
 ## Overview
 
-The original project is based on Siraj's repo and based on [this](https://youtu.be/f6Bf3gl4hWY) video on Youtube. Basically I'm building a model that recognizes handwritten digit images (MNIST).  Using the simple [Keras](http://keras.io/) Library, we wrap it into a Webapp using the [Flask](http://flask.pocoo.org/) Micro Framework. 
+The original project is based on Siraj's repo and based on [this](https://youtu.be/f6Bf3gl4hWY) video on Youtube. Basically I'm building a model that recognizes handwritten digit images (MNIST).  Using the simple [Keras](http://keras.io/) Library, we wrap it into a Webapp using the [Flask](http://flask.pocoo.org/) Micro Framework. And in GCP i'm using ComputeEngine which is easy to deploy even without using a container (Docker)
 
 After testing in locally, we go to Google Cloud, activate the ComputeEngine App and host / serve up our solution! The website is [here](https://digit-recogniser-123.appspot.com/#)
 
