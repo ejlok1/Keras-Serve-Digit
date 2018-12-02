@@ -17,7 +17,7 @@ activate Digit-Recogniser
 pip install -r requirements.txt
 ```
 
-## Usage
+## Testing locally
 
 Once dependencies are installed, test to make sure it works on your localhost before going to Google Cloud. In command line:
 
@@ -30,6 +30,10 @@ python app.py
 It's serving a saved Keras model to you via Flask. On the web browser the address is 
 ```http://localhost:5000)``` 
 thou you need to change it on the app.py file. 
+
+## Google Cloud hosting 
+Select the Compute Engine solution, implement our model on an environement using the Google terminal. Here's a quick [guide](https://cloud.google.com/appengine/docs/flexible/python/quickstart) Then deploy! The live [website](https://digit-recogniser-123.appspot.com/#)
+
 
 ## Credits
 
