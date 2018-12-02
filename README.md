@@ -5,7 +5,8 @@
 
 The original project is based on Siraj's repo and based on [this](https://youtu.be/f6Bf3gl4hWY) video on Youtube. Basically I'm building a model that recognizes handwritten digit images (MNIST).  Using the simple [Keras](http://keras.io/) Library, we wrap it into a Webapp using the [Flask](http://flask.pocoo.org/) Micro Framework. 
 
-After testing in locally, we go to Google Cloud, activate the ComputeEngine and host our solution!  
+After testing in locally, we go to Google Cloud, activate the ComputeEngine App and host / serve up our solution! The website is [here](https://digit-recogniser-123.appspot.com/#)
+
 
 ## Dependencies
 
@@ -39,3 +40,5 @@ The credits for this code go to [moinudeen](https://github.com/moinudeen) who is
 - Enable app to work on tablets and smartphones 
 - Get it to work on Dockers (and gRPC) 
 - Get it to work on Kubeflow 
+- Check again to see if GCP actually charges me for hosting this.... time will tell I suppose 
+- Deploy the real project, but that probably will be another seperate repository
