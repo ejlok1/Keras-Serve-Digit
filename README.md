@@ -1,23 +1,41 @@
-# How to Deploy a Keras Model to Production
+# Deploy a Keras Model to the web
 
 
 ## Overview
 
-This is the code for [this](https://youtu.be/f6Bf3gl4hWY) video on Youtube by Siraj Raval. We're going to build a model that recognizes handwritten digit images (MNIST).  Developed using [TensorFlow](https://www.tensorflow.org/) and the super simple [Keras](http://keras.io/) Library. Wrapped into a Webapp using [Flask](http://flask.pocoo.org/) Micro Framework.
+The original project is based on Siraj's repo and based on [this](https://youtu.be/f6Bf3gl4hWY) video on Youtube. Basically I'm building a model that recognizes handwritten digit images (MNIST).  Using the simple [Keras](http://keras.io/) Library, we wrap it into a Webapp using the [Flask](http://flask.pocoo.org/) Micro Framework. 
+
+After testing in locally, we go to Google Cloud, activate the ComputeEngine and host our solution!  
 
 ## Dependencies
 
-```sudo pip install -r requirements.txt```
+```
+mkdir Digit-Recogniser 
+conda create --name Digit-Recogniser python=3.5 pip numpy
+activate Digit-Recogniser
+pip install -r requirements.txt
+```
 
 ## Usage
 
-Once dependencies are installed, just run this to see it in your browser. 
+Once dependencies are installed, test to make sure it works on your localhost before going to Google Cloud. In command line:
 
-```python app.py```
+```
+cd Digit-Recogniser
+activate Digit-Recogniser
+python app.py
+```
 
-That's it! It's serving a saved Keras model to you via Flask. 
+It's serving a saved Keras model to you via Flask. On the web browser the address is 
+```http://localhost:5000)``` 
+thou you need to change it on the app.py file. 
 
 ## Credits
 
-The credits for this code go to [moinudeen](https://github.com/moinudeen). I've merely created a wrapper to get people started.
+The credits for this code go to [moinudeen](https://github.com/moinudeen) who is the original author of this project. 
 
+## Further improvements 
+- Documentation of the Google Cloud hosting process 
+- Enable app to work on tablets and smartphones 
+- Get it to work on Dockers (and gRPC) 
+- Get it to work on Kubeflow 

@@ -1,0 +1,191 @@
+###############
+# testing it - using conda environment
+###############
+# Navigate to the project folder 
+cmd on C:\Users\User\Documents\GIT\Deep Learning Project\Tensorflow and Keras Serving\Keras\digit-recognizer-flask-cnn-master\gcloud deploy
+
+
+# Install the conda environment ('testing') and activate it 
+conda create --name testing python=3.5 pip numpy (or pythnon=2.7 if relevant) 
+activate testing ('deactivate' to cancel out)
+
+# install a few other packages that is specific on this environment 
+pip install gunicorn
+conda install --yes --file requirements.txt
+set "KERAS_BACKEND=tensorflow"
+
+# error occured. Seems like we need to upgrade tensorflow to 1.12.0
+pip install --upgrade tensorflow   
+
+# Test it - make sure to change the port on the app.py file to "localhost"
+python app.py 
+
+###############
+# Google cloud tutorial 
+###############
+# Tutorial - https://console.cloud.google.com/appengine/start?project=hello-world-223803&walkthrough_tutorial_id=python_gae_quickstart
+
+# lets get into the GCP shell 
+Open Google Cloud Shell terminal 
+
+# Lets make a sandpit 
+Before doing this, check that you are in the correct project area in GCP. FOr this case its the 'Hello_world helical-sled-221702'
+mkdir GCP_Test
+cd GCP_Test
+
+git clone \
+    https://github.com/GoogleCloudPlatform/python-docs-samples
+
+git pull origin master	
+
+# The tutorial says we need to get into this part of the folder:
+cd python-docs-samples/appengine/standard_python37/hello_world
+	
+cat main.py
+cat app.yaml
+
+# Create the virtualenv for this folder - Hello_world
+virtualenv --python python3 \
+    ~/envs/hello_world
+
+# now Actiivate the virtualenv
+source \
+    ~/envs/hello_world/bin/activate
+
+# Lets install the dependencies 
+pip install -r requirements.txt
+
+# Test run the app 
+python main.py
+
+# Now deploy it 
+gcloud app create
+gcloud app deploy app.yaml --project \
+    helical-sled-221702
+	
+http://helical-sled-221702.appspot.com/
+
+############################################
+# Now Deploy an example deep learning model 
+############################################
+# Create a space for testing 
+mkdir GCP Test
+cd GCP Test
+
+# Now clone a project 
+git clone https://github.com/ejlok1/Keras-Serve-Digit.git
+
+
+# Now go to the project folder 
+cd digit-recognizer-flask-cnn
+
+# manually add on git the app.yaml file. This is really just for deployment 
+# Follow this guide - https://cloud.google.com/appengine/docs/flexible/python/quickstart
+	runtime: python
+	env: flex
+	entrypoint: gunicorn -b :$PORT main:app
+
+	runtime_config:
+	  python_version: 3
+
+	# This sample incurs costs to run on the App Engine flexible environment. 
+	# The settings below are to reduce costs during testing and are not appropriate
+	# for production use. For more information, see:
+	# https://cloud.google.com/appengine/docs/flexible/python/configuring-your-app-with-app-yaml
+	manual_scaling:
+	  instances: 1
+	resources:
+	  cpu: 1
+	  memory_gb: 0.5
+	  disk_size_gb: 10
+
+
+# Make sure its updated 
+git pull origin master	
+(to remove a folder just do 'rm -rf digit-recognizer-flask-cnn')
+
+# Check out the files quickly 
+cat app.py
+cat app.yaml
+
+# Make the environment 
+virtualenv --python python2 ~/envs/GCP_Test/digit-recognizer-flask-cnn
+source ~/envs/GCP_Test/digit-recognizer-flask-cnn/bin/activate   # This needs to be run everytime you relogin, as this is the environment 
+
+# install all the necessary packages 
+pip install -r requirements.txt  # pip install tensorflow --upgrade
+
+# Before deploy the app, test it on GCP terminal 
+python app.py   # Make sure you're in the correct area ie. (digit-recognizer-flask-cnn) ejlok1@cloudshell:~/GCP_Test/digit-recognizer-flask-cnn (hello-world-223803)$
+# when running this first time, there was an error due to tensorflow version. But because the cloud version can't do pip install, i've had to change the requirements.txt file
+
+# create and deploy the app -- https://cloud.google.com/appengine/docs/flexible/python/quickstart
+gcloud app create
+gcloud app deploy app.yaml --project hello-world-223803 
+
+gcloud app browse
+	
+https://hello-world-223803.appspot.com/
+
+
+############################################
+# Digit Recogniser  
+############################################
+
+# In GCP create a new project 
+
+# Create the project
+mkdir Digit-Recogniser
+cd Digit-Recogniser
+
+# Now clone a project  (NOTE: Git name now changed to Keras-Serve-Digit)
+git clone https://github.com/ejlok1/Keras-Serve-Siraj.git
+
+# Enter the main folder
+cd Keras-Serve-Siraj
+
+# manually add on git the app.yaml file. This is really just for deployment 
+# Follow this guide - https://cloud.google.com/appengine/docs/flexible/python/quickstart
+	runtime: python
+	env: flex
+	entrypoint: gunicorn -b :$PORT app:app   
+
+	runtime_config:
+	  python_version: 3
+
+	# This sample incurs costs to run on the App Engine flexible environment. 
+	# The settings below are to reduce costs during testing and are not appropriate
+	# for production use. For more information, see:
+	# https://cloud.google.com/appengine/docs/flexible/python/configuring-your-app-with-app-yaml
+	manual_scaling:
+	  instances: 1
+	resources:
+	  cpu: 1
+	  memory_gb: 0.5
+	  disk_size_gb: 10
+
+	  
+	  
+# Make the environment 
+virtualenv --python python3 ~/envs/Digit-Recogniser/Keras-Serve-Siraj
+source ~/envs/Digit-Recogniser/Keras-Serve-Siraj/bin/activate   # This needs to be run everytime you relogin, as this is the environment 
+
+# install all the necessary packages 
+pip install -r requirements.txt  # pip install tensorflow --upgrade
+
+# Before deploy the app, test it on GCP terminal 
+python app.py   # Make sure you're in the correct area ie. ~/Digit-Recogniser/Keras-Serve-Siraj
+# when running this first time, there was an error due to tensorflow version. But because the cloud version can't do pip install, i've had to change the requirements.txt file
+
+# Note about the .js file 
+The testing deployment was successful but, the web wasn't working as expected. So i did some debuging and turns out the index.html file on templates required some changes. 
+I followed this web - https://cloud.google.com/compute/docs/tutorials/javascript-guide
+SO what I did was modify that one line on the html file and included the extra line: 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+   <script src="https://apis.google.com/js/client.js"></script>
+
+
+# Now time to deploy!
+gcloud app create
+gcloud app deploy app.yaml --project digit-recogniser-123
+
