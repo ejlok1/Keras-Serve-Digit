@@ -1,7 +1,5 @@
+# Awesome post 
+
 # https://www.youtube.com/watch?v=bxFaa_FNdL4
+# https://www.youtube.com/watch?v=Y2fMCxLz6wM
 
-# https://www.taniarascia.com/how-to-upload-files-to-a-server-with-plain-javascript-and-php/
-
-# https://www.quora.com/How-do-I-upload-files-using-Flask-framework-in-Python
-
-# http://flask.pocoo.org/docs/1.0/patterns/fileuploads/
